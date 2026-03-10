@@ -72,7 +72,7 @@ const BatchesList = () => {
                                 <>
                                     <div className="absolute inset-0 bg-gradient-to-t from-white to-transparent opacity-60 z-[1]" />
                                     <img
-                                        src={batch.images[0].startsWith('http') ? batch.images[0] : batch.images[0]}
+                                        src={batch.images[0].startsWith('http') ? batch.images[0] : `${import.meta.env.VITE_API_URL.replace('/api', '')}${batch.images[0]}`}
                                         alt={batch.woolType}
                                         className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                                     />

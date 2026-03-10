@@ -140,7 +140,7 @@ const Marketplace = () => {
                                     <>
                                         <div className="absolute inset-0 bg-gradient-to-t from-white to-transparent opacity-80 z-[1]" />
                                         <img
-                                            src={product.images[0].startsWith('http') ? product.images[0] : product.images[0]}
+                                            src={product.images[0].startsWith('http') ? product.images[0] : `${import.meta.env.VITE_API_URL.replace('/api', '')}${product.images[0]}`}
                                             alt={product.woolType}
                                             className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                                         />

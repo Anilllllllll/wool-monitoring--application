@@ -18,7 +18,8 @@ const createBatch = async (req, res) => {
 
     try {
         const { woolType, weight, moisture, source } = req.body;
-        const images = req.files ? req.files.map(file => '/uploads/' + file.filename) : [];
+        // multer-storage-cloudinary stores the full image URL in req.file.path
+        const images = req.files ? req.files.map(file => file.path) : [];
 
         const batch = new WoolBatch({
             creator: req.user._id,
@@ -41,9 +42,9 @@ const createBatch = async (req, res) => {
 
 const getBatches = async (req, res) => {
     try {
-        const page  = Math.max(1, parseInt(req.query.page)  || 1);
+        const page = Math.max(1, parseInt(req.query.page) || 1);
         const limit = Math.min(100, parseInt(req.query.limit) || 20);
-        const skip  = (page - 1) * limit;
+        const skip = (page - 1) * limit;
 
         // ── Role-based query filters ──────────────────────────────────────────
         let query = {};
@@ -80,7 +81,7 @@ const getBatches = async (req, res) => {
 
         // Optional additional filters from query string
         if (req.query.status) query.qualityStatus = req.query.status;
-        if (req.query.stage)  query.currentStage  = req.query.stage;
+        if (req.query.stage) query.currentStage = req.query.stage;
 
         const [batches, total] = await Promise.all([
             WoolBatch.find(query)

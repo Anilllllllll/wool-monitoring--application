@@ -229,7 +229,7 @@ const MyOrders = () => {
                                         <div className="flex items-center gap-4">
                                             <div className="w-12 h-12 bg-gray-100 rounded-lg overflow-hidden">
                                                 {item.images && item.images.length > 0 ? (
-                                                    <img src={item.images[0].startsWith('http') ? item.images[0] : item.images[0]} className="w-full h-full object-cover" alt="item" />
+                                                    <img src={item.images[0].startsWith('http') ? item.images[0] : `${import.meta.env.VITE_API_URL.replace('/api', '')}${item.images[0]}`} className="w-full h-full object-cover" alt="item" />
                                                 ) : (
                                                     <div className="w-full h-full flex items-center justify-center text-xs text-gray-400">Img</div>
                                                 )}

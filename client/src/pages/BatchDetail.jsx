@@ -332,7 +332,7 @@ const BatchDetail = () => {
                                         >
                                             <div className="absolute inset-0 bg-primary-500/0 group-hover:bg-primary-500/20 transition-colors z-10" />
                                             <img
-                                                src={img.startsWith('http') ? img : img}
+                                                src={img.startsWith('http') ? img : `${import.meta.env.VITE_API_URL.replace('/api', '')}${img}`}
                                                 alt={`Batch ${i + 1}`}
                                                 className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                                             />
@@ -429,7 +429,7 @@ const BatchDetail = () => {
                                 {batch.images.map((img, i) => (
                                     <div key={i} className="relative h-64 rounded-xl overflow-hidden border border-gray-200">
                                         <img
-                                            src={img.startsWith('http') ? img : img}
+                                            src={img.startsWith('http') ? img : `${import.meta.env.VITE_API_URL.replace('/api', '')}${img}`}
                                             alt={`Inspection ${i}`}
                                             className="w-full h-full object-cover"
                                         />
@@ -479,7 +479,7 @@ const BatchDetail = () => {
                         <XCircle size={32} />
                     </button>
                     <img
-                        src={selectedImage.startsWith('http') ? selectedImage : selectedImage}
+                        src={selectedImage.startsWith('http') ? selectedImage : `${import.meta.env.VITE_API_URL.replace('/api', '')}${selectedImage}`}
                         alt="Full Preview"
                         className="max-w-[95vw] max-h-[95vh] rounded shadow-2xl"
                         onClick={(e) => e.stopPropagation()}
