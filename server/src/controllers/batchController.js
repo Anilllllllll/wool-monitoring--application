@@ -34,6 +34,7 @@ const createBatch = async (req, res) => {
         });
 
         const created = await batch.save();
+        console.log(`[Batch] Created: ${created.batchId} for Farmer: ${req.user.email}`);
         res.status(201).json(created);
     } catch (err) {
         res.status(500).json({ message: err.message });
@@ -64,7 +65,7 @@ const getBatches = async (req, res) => {
             case 'QUALITY_INSPECTOR':
                 // Default to Finished if no stage specified, but allow all if permission exists
                 if (req.user.permissions?.includes('view_all_batches')) {
-                    query = stage ? { currentStage: stage } : {};
+                    query = req.query.stage ? { currentStage: req.query.stage } : {};
                 } else {
                     query = { currentStage: 'Finished' };
                 }
@@ -82,6 +83,8 @@ const getBatches = async (req, res) => {
             default:
                 query = {};
         }
+
+        console.log(`[Batch] Get Requests - User: ${req.user.email}, Role: ${req.user.role}, Query:`, JSON.stringify(query));
 
         // Optional additional filters from query string
         if (req.query.status) query.qualityStatus = req.query.status;
