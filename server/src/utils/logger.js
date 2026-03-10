@@ -14,19 +14,21 @@ const logFormat = winston.format.combine(
     })
 );
 
-const logger = winston.createLogger({
-    level: process.env.NODE_ENV === 'production' ? 'info' : 'debug',
-    format: logFormat,
-    transports: [
-        // Console output (colorized for development)
-        new winston.transports.Console({
-            format: winston.format.combine(
-                winston.format.colorize(),
-                logFormat
-            ),
-        }),
+const transports = [
+    // Console output (colorized for development/production log aggregation)
+    new winston.transports.Console({
+        format: winston.format.combine(
+            winston.format.colorize(),
+            logFormat
+        ),
+    }),
+];
 
-        // Daily rotating error log
+const exceptionHandlers = [];
+
+// Only write to files if not in production (PaaS like Render have ephemeral filesystems)
+if (process.env.NODE_ENV !== 'production') {
+    transports.push(
         new DailyRotateFile({
             filename: path.join(logDir, 'error-%DATE%.log'),
             datePattern: 'YYYY-MM-DD',
@@ -34,22 +36,28 @@ const logger = winston.createLogger({
             maxFiles: '30d',
             maxSize: '20m',
         }),
-
-        // Daily rotating combined log
         new DailyRotateFile({
             filename: path.join(logDir, 'combined-%DATE%.log'),
             datePattern: 'YYYY-MM-DD',
             maxFiles: '14d',
             maxSize: '20m',
-        }),
-    ],
-    exceptionHandlers: [
+        })
+    );
+
+    exceptionHandlers.push(
         new DailyRotateFile({
             filename: path.join(logDir, 'exceptions-%DATE%.log'),
             datePattern: 'YYYY-MM-DD',
             maxFiles: '30d',
-        }),
-    ],
+        })
+    );
+}
+
+const logger = winston.createLogger({
+    level: process.env.NODE_ENV === 'production' ? 'info' : 'debug',
+    format: logFormat,
+    transports,
+    exceptionHandlers,
 });
 
 module.exports = logger;
