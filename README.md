@@ -100,15 +100,11 @@ The app will be available at `http://localhost:5173`.
 
 | Farmer Dashboard | Marketplace |
 |:---:|:---:|
-| ![Farmer Dashboard](<img width="1913" height="1105" alt="image" src="https://github.com/user-attachments/assets/82c2826f-ff1f-41ea-9794-594a5148f740" />
-) | ![Marketplace]<img width="1918" height="1109" alt="image" src="https://github.com/user-attachments/assets/1c0fa7c8-8e1c-4ca5-bd4c-9fd9825071bb" />
-) |
+| ![Farmer Dashboard](<img width="1913" height="1105" alt="image" src="https://github.com/user-attachments/assets/82c2826f-ff1f-41ea-9794-594a5148f740" />| ![Marketplace]<img width="1918" height="1109" alt="image" src="https://github.com/user-attachments/assets/1c0fa7c8-8e1c-4ca5-bd4c-9fd9825071bb" /> 
 
 | Inspection Hub | Mobile View |
 |:---:|:---:|
-| ![Lab Hub](<img width="1919" height="1107" alt="image" src="https://github.com/user-attachments/assets/d9b6994d-c6fb-4f88-81db-d48ed80abaa0" />
-) | ![Mobile](<img width="1918" height="1106" alt="image" src="https://github.com/user-attachments/assets/12812eee-ecb1-4376-ae38-4a2465a11746" />
-) |
+| ![Lab Hub](<img width="1919" height="1107" alt="image" src="https://github.com/user-attachments/assets/d9b6994d-c6fb-4f88-81db-d48ed80abaa0" /> | ![Mobile](<img width="1918" height="1106" alt="image" src="https://github.com/user-attachments/assets/12812eee-ecb1-4376-ae38-4a2465a11746" /> |
 
 ## 🛡️ License
 
