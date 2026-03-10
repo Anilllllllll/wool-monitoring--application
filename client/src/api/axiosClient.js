@@ -1,3 +1,4 @@
+// Robust Axios client with automatic URL normalization
 import axios from 'axios';
 
 const axiosClient = axios.create({
