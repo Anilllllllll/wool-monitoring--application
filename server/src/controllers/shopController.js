@@ -4,10 +4,15 @@ const Order = require('../models/Order');
 const WoolBatch = require('../models/WoolBatch');
 const logger = require('../utils/logger');
 
-const razorpay = new Razorpay({
-    key_id: process.env.RAZORPAY_KEY_ID,
-    key_secret: process.env.RAZORPAY_KEY_SECRET,
-});
+let razorpay = null;
+if (process.env.RAZORPAY_KEY_ID && process.env.RAZORPAY_KEY_SECRET) {
+    razorpay = new Razorpay({
+        key_id: process.env.RAZORPAY_KEY_ID,
+        key_secret: process.env.RAZORPAY_KEY_SECRET,
+    });
+} else {
+    logger.warn('Razorpay keys are not set. Online payments will not be available.');
+}
 
 const getProducts = async (req, res) => {
     try {
