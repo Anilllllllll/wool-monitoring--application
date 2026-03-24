@@ -1,112 +1,237 @@
-<img width="1913" height="1105" alt="image" src="https://github.com/user-attachments/assets/e0453ddd-d00b-4969-b76c-6c27d3ee4814" /># Wool Monitoring Application 🐑
+# 🐑 Wool Monitoring Application
 
-A modern, enterprise-grade full-stack application for managing the wool supply chain, from farm to fabric. This platform serves Farmers, Mill Operators, Quality Inspectors, and Buyers with tailored dashboards and tools.
+A modern, enterprise-grade **full-stack supply chain management platform** for tracking wool from **farm to fabric**.
+This system provides role-based dashboards for Farmers, Inspectors, Mill Operators, Buyers, and Admins, enabling quality tracking, marketplace operations, and real-time monitoring.
+
+---
+
+## 📸 Preview
+
+<img width="1913" height="1105" src="https://github.com/user-attachments/assets/e0453ddd-d00b-4969-b76c-6c27d3ee4814" />
+<img width="1919" height="1103" src="https://github.com/user-attachments/assets/2cb18300-c73b-4de8-8e03-258e01c94c9e" />
+
+---
 
 ## 🚀 Features
 
-*   **Role-Based Access Control (RBAC)**: Secure dashboards for Farmers, Inspectors, Mill Operators, Buyers, and Admins.
-*   **Detailed Batch Tracking**: Track wool batches through processing stages (Cleaning, Carding, Spinning, etc.) with a visual timeline.
-*   **Scientific Quality Inspections**: Lab interface for recording micron, yield, and tensile strength data.
-*   **Marketplace & Orders**: Functioning e-commerce system for approved wool batches with invoice generation.
-*   **IoT Monitoring**: Real-time environmental monitoring dashboard for warehouse conditions.
-*   **premium UI/UX**: Dark glassmorphism theme, smooth animations (Framer Motion), and responsive layouts.
+### 🔐 Role-Based Access Control (RBAC)
+
+* Farmer Dashboard
+* Quality Inspector Dashboard
+* Mill Operator Dashboard
+* Buyer Marketplace
+* Admin Panel
+
+### 📦 Wool Batch Tracking
+
+Track wool batches through processing stages:
+
+* Cleaning
+* Carding
+* Spinning
+* Dyeing
+* Packaging
+* Shipping
+
+Includes **visual timeline tracking** for each batch.
+
+### 🧪 Quality Inspection System
+
+Lab interface for recording:
+
+* Micron
+* Yield %
+* Tensile Strength
+* Quality grading
+* Inspection reports
+
+### 🛒 Marketplace & Orders
+
+* Buy/Sell wool batches
+* Order management
+* Invoice generation
+* Approved batch listing
+* Buyer dashboard
+
+### 🌡️ IoT Monitoring
+
+* Warehouse temperature
+* Humidity monitoring
+* Storage conditions dashboard
+* Real-time environmental data
+
+### 🎨 Premium UI/UX
+
+* Dark glassmorphism theme
+* Smooth animations (Framer Motion)
+* Responsive design
+* Dashboard analytics
+* Modern UI components
+
+---
 
 ## 🛠️ Tech Stack
 
 ### Frontend
-*   **Framework**: React (Vite)
-*   **Styling**: Tailwind CSS (Custom Dark/Glass Theme)
-*   **Animations**: Framer Motion
-*   **Icons**: Lucide React
-*   **State Management**: React Context API
-*   **HTTP Client**: Axios
+
+| Technology    | Purpose            |
+| ------------- | ------------------ |
+| React (Vite)  | Frontend framework |
+| Tailwind CSS  | Styling            |
+| Framer Motion | Animations         |
+| Lucide React  | Icons              |
+| Context API   | State management   |
+| Axios         | API requests       |
 
 ### Backend
-*   **Runtime**: Node.js
-*   **Framework**: Express.js
-*   **Database**: MongoDB (Mongoose)
-*   **Authentication**: JWT (JSON Web Tokens)
-*   **File Uploads**: Multer
+
+| Technology | Purpose           |
+| ---------- | ----------------- |
+| Node.js    | Runtime           |
+| Express.js | Backend framework |
+| MongoDB    | Database          |
+| Mongoose   | ODM               |
+| JWT        | Authentication    |
+| Multer     | File uploads      |
+
+---
 
 ## 📂 Project Structure
 
-```bash
-wool-monitoring-app/
-├── client/           # React Frontend
-│   ├── src/
-│   │   ├── components/  # Reusable UI components
-│   │   ├── layouts/     # Dashboard & Auth layouts
-│   │   ├── pages/       # Application routes/pages
-│   │   └── ...
-├── server/           # Node.js/Express Backend
-│   ├── src/
-│   │   ├── controllers/ # Logic for routes
-│   │   ├── models/      # Mongoose Schemas
-│   │   ├── routes/      # API Endpoints
-│   │   └── ...
 ```
+wool-monitoring-app/
+├── client/                # React Frontend
+│   ├── src/
+│   │   ├── components/
+│   │   ├── layouts/
+│   │   ├── pages/
+│   │   ├── context/
+│   │   └── services/
+│
+├── server/                # Node.js Backend
+│   ├── src/
+│   │   ├── controllers/
+│   │   ├── models/
+│   │   ├── routes/
+│   │   ├── middleware/
+│   │   └── config/
+│
+└── README.md
+```
+
+---
 
 ## ⚡ Getting Started
 
 ### Prerequisites
-*   Node.js (v16+)
-*   MongoDB (Local or Atlas URI)
+
+* Node.js (v16+)
+* MongoDB (Local or Atlas)
+* npm
+
+---
 
 ### Installation
 
-1.  **Clone the repository**
-    ```bash
-    git clone https://github.com/yourusername/wool-monitoring-application.git
-    cd wool-monitoring-application
-    ```
+#### 1. Clone Repository
 
-2.  **Install Dependencies**
-    ```bash
-    # Install server dependencies
-    cd server
-    npm install
+```bash
+git clone https://github.com/yourusername/wool-monitoring-application.git
+cd wool-monitoring-application
+```
 
-    # Install client dependencies
-    cd ../client
-    npm install
-    ```
+#### 2. Install Dependencies
 
-3.  **Environment Setup**
-    Create a `.env` file in the `server` directory:
-    ```env
-    PORT=5000
-    MONGO_URI=your_mongodb_connection_string
-    JWT_SECRET=your_jwt_secret_key
-    ```
+```bash
+# Server
+cd server
+npm install
 
-### Running the App
+# Client
+cd ../client
+npm install
+```
 
-1.  **Start the Backend**
-    ```bash
-    cd server
-    npm run dev
-    ```
+#### 3. Environment Variables
 
-2.  **Start the Frontend**
-    ```bash
-    cd client
-    npm run dev
-    ```
+Create `.env` inside **server/**
 
-The app will be available at `http://localhost:5173`.
+```
+PORT=5000
+MONGO_URI=your_mongodb_connection_string
+JWT_SECRET=your_secret_key
+```
+
+---
+
+### Running the Application
+
+#### Start Backend
+
+```bash
+cd server
+npm run dev
+```
+
+#### Start Frontend
+
+```bash
+cd client
+npm run dev
+```
+
+Application runs at:
+
+```
+http://localhost:5173
+```
+
+---
 
 ## 📸 Screenshots
 
-
-| Farmer Dashboard | Marketplace |
-|:---:|:---:|
-| ![Farmer Dashboard](<img width="1913" height="1105" alt="image" src="https://github.com/user-attachments/assets/82c2826f-ff1f-41ea-9794-594a5148f740" />| ![Marketplace]<img width="1918" height="1109" alt="image" src="https://github.com/user-attachments/assets/1c0fa7c8-8e1c-4ca5-bd4c-9fd9825071bb" /> 
+| Farmer Dashboard | Marketplace      |
+| ---------------- | ---------------- |
+| Dashboard View   | Marketplace View |
 
 | Inspection Hub | Mobile View |
-|:---:|:---:|
-| ![Lab Hub](<img width="1919" height="1107" alt="image" src="https://github.com/user-attachments/assets/d9b6994d-c6fb-4f88-81db-d48ed80abaa0" /> | ![Mobile](<img width="1918" height="1106" alt="image" src="https://github.com/user-attachments/assets/12812eee-ecb1-4376-ae38-4a2465a11746" /> |
+| -------------- | ----------- |
+| Lab Interface  | Mobile UI   |
 
-## 🛡️ License
+---
 
-This project is licensed under the MIT License.
+## 🎯 Key Modules
 
+* Authentication & Authorization
+* Role-based Dashboards
+* Batch Tracking System
+* Inspection Management
+* Marketplace System
+* Order & Invoice System
+* IoT Monitoring Dashboard
+* Analytics & Reports
+
+---
+
+## 🔮 Future Improvements
+
+* Blockchain wool traceability
+* Payment gateway integration
+* SMS/Email notifications
+* Mobile app version
+* AI quality prediction
+* Supply chain analytics
+* Export reports (PDF/Excel)
+* Multi-language support
+
+---
+
+## 👨‍💻 Author
+
+**Anil Kumar**
+
+---
+
+## ⭐ Support
+
+If you like this project, please give it a **star ⭐ on GitHub**.
