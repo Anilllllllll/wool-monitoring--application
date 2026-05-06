@@ -12,6 +12,7 @@ const app = express();
 // ─── Security Headers ────────────────────────────────────────────────────────
 app.use(helmet({
     crossOriginEmbedderPolicy: false,
+    crossOriginResourcePolicy: { policy: 'cross-origin' },
     contentSecurityPolicy: {
         directives: {
             defaultSrc: ["'self'"],
@@ -19,7 +20,8 @@ app.use(helmet({
             fontSrc: ["'self'", 'https://fonts.gstatic.com'],
             imgSrc: ["'self'", 'data:', 'https:'],
             scriptSrc: ["'self'"],
-            connectSrc: ["'self'", 'https://api.razorpay.com'],
+            connectSrc: ["'self'", 'https://api.razorpay.com', 'http://13.127.22.138', 'ws://13.127.22.138'],
+            upgradeInsecureRequests: null,
         },
     },
 }));
@@ -35,8 +37,8 @@ app.use(cors({
     origin: (origin, callback) => {
         // Allow requests with no origin (like mobile apps or curl requests)
         // Allow specific origins from environment variables
-        // Allow any Vercel preview URL dynamically
-        if (!origin || allowedOrigins.includes(origin) || origin.endsWith('.vercel.app')) {
+        // Allow any Vercel preview URL or AWS S3 website URL dynamically
+        if (!origin || allowedOrigins.includes(origin) || origin.endsWith('.vercel.app') || origin.endsWith('.amazonaws.com')) {
             callback(null, true);
         } else {
             callback(new Error(`CORS: Origin ${origin} not allowed`));
