@@ -1,0 +1,44 @@
+name: 🚀 Deploy to AWS EC2
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  deploy:
+    name: Deploy to EC2
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 🔐 Deploy via SSH
+        uses: appleboy/ssh-action@v1
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ubuntu
+          key: ${{ secrets.EC2_SSH_KEY }}
+          script_stop: true
+          script: |
+            echo "📦 Pulling latest code..."
+            cd ~/wool-monitoring--application
+            git pull origin main
+
+            echo "🔧 Installing server dependencies..."
+            cd server
+            npm install --production
+
+            echo "🔄 Restarting backend..."
+            pm2 restart wool-server
+
+            echo "📦 Installing client dependencies..."
+            cd ../client
+            npm install
+
+            echo "🏗️ Building frontend..."
+            echo "VITE_API_URL=" > .env.production
+            npm run build
+
+            echo "📂 Deploying frontend to Nginx..."
+            sudo rm -rf /var/www/wool-frontend/*
+            sudo cp -r dist/* /var/www/wool-frontend/
+
+            echo "✅ Deployment complete!"
