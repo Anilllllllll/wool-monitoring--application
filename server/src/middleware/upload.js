@@ -1,22 +1,31 @@
 const multer = require('multer');
-const cloudinary = require('cloudinary').v2;
-const { CloudinaryStorage } = require('multer-storage-cloudinary');
+const { S3Client } = require('@aws-sdk/client-s3');
+const multerS3 = require('multer-s3');
 const path = require('path');
 
-// Configure Cloudinary
-cloudinary.config({
-    cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
-    api_key: process.env.CLOUDINARY_API_KEY,
-    api_secret: process.env.CLOUDINARY_API_SECRET,
+// Configure AWS S3 Client
+const s3 = new S3Client({
+    region: process.env.AWS_REGION || 'ap-south-1',
+    credentials: {
+        accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+        secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+    },
 });
 
-// Configure Multer Storage for Cloudinary
-const storage = new CloudinaryStorage({
-    cloudinary: cloudinary,
-    params: {
-        folder: 'wool-monitoring',
-        allowed_formats: ['jpg', 'jpeg', 'png', 'webp'],
-        transformation: [{ width: 1000, height: 1000, crop: 'limit' }] // Optional optimization
+// Configure Multer Storage for S3
+const storage = multerS3({
+    s3: s3,
+    bucket: process.env.AWS_S3_BUCKET || 'wool-monitoring-uploads',
+    contentType: multerS3.AUTO_CONTENT_TYPE,
+    metadata: (req, file, cb) => {
+        cb(null, { fieldName: file.fieldname });
+    },
+    key: (req, file, cb) => {
+        // Generate unique filename: wool-monitoring/userId/timestamp-originalname
+        const userId = req.user?._id || 'anonymous';
+        const uniqueName = `${Date.now()}-${Math.round(Math.random() * 1E9)}`;
+        const ext = path.extname(file.originalname);
+        cb(null, `wool-monitoring/${userId}/${uniqueName}${ext}`);
     },
 });
 

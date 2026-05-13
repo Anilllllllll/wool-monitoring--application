@@ -18,8 +18,8 @@ const createBatch = async (req, res) => {
 
     try {
         const { woolType, weight, moisture, source } = req.body;
-        // multer-storage-cloudinary stores the full image URL in req.file.path
-        const images = req.files ? req.files.map(file => file.path) : [];
+        // multer-s3 stores the public S3 URL in req.file.location
+        const images = req.files ? req.files.map(file => file.location || file.path) : [];
 
         const batch = new WoolBatch({
             creator: req.user._id,
