@@ -16,7 +16,7 @@ jobs:
           host: ${{ secrets.EC2_HOST }}
           username: ubuntu
           key: ${{ secrets.EC2_SSH_KEY }}
-          script_stop: true
+          
           script: |
             echo "📦 Pulling latest code..."
             cd ~/wool-monitoring--application
